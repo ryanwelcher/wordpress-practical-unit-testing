@@ -1,4 +1,4 @@
-#WordPress Unit Testing with WP_MOCK #
+#WordPress Unit Testing with PHPUnit and WP_MOCK #
 
 
 
