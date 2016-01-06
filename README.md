@@ -18,3 +18,10 @@ to load the plugin into WordPress - just update the paths as needed.
 `config.vm.synced_folder "~/repositories/unit-test-examples", "/srv/www/wordpress-develop/src/wp-content/plugins/unit-test-example", owner: 'www-data', group: 'www-data', mount_options: ["dmode=775", "fmode=664"]`
 
 
+##References##
+
+[Composer](http://getcomposer.org)
+
+[PHPUnit](https://phpunit.de/)
+
+[WP_MOCK](https://github.com/10up/wp_mock)
