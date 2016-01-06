@@ -70,6 +70,8 @@ class WP_Mock_Tests extends PHPUnit_Framework_TestCase {
 
 		$results = \tenup\demo\get_staff_email_list( 1 );
 
+		//now that we have the data that we need, we can do any assertions
+
 		//assert the type
 		$this->assertSame( 'array', gettype( $results ) );
 
