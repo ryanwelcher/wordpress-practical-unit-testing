@@ -1,0 +1,14 @@
+{
+    "name": "10up/testing_with_wp_mock",
+    "description": "Plugin that demonstrates how to add used PHPUnit and WP_Mock for unit testing in WordPress",
+    "authors": [
+        {
+            "name": "Ryan Welcher",
+            "email": "ryan.welcher@10up.com"
+        }
+    ],
+    "require-dev": {
+        "10up/wp_mock": "dev-master",
+        "phpunit/phpunit": "^4.8"
+    }
+}

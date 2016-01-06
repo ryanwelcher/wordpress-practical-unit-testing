@@ -1,0 +1,18 @@
+<phpunit bootstrap="unit-tests/bootstrap.php"
+         backupGlobals="false"
+         colors="true"
+         convertErrorsToExceptions="true"
+         convertNoticesToExceptions="true"
+         convertWarningsToExceptions="true"
+>
+    <testsuites>
+        <testsuite>
+            <directory suffix='Tests.php'>unit-tests/tests</directory>
+        </testsuite>
+    </testsuites>
+    <groups>
+        <exclude>
+            <group>ajax</group>
+        </exclude>
+    </groups>
+</phpunit>
