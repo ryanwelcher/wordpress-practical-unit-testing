@@ -106,9 +106,18 @@ class WP_Mock_Tests extends PHPUnit_Framework_TestCase {
 	 */
 	function test_custom_action() {
 
-		\WP_Mock::expectAction( 'above_staff_avatar' );
+		\WP_Mock::expectAction( 'above_staff_list' );
 
 		\tenup\demo\generate_staff_list();
+	}
+
+	/**
+	 * Testing a custom action that has a parameter
+	 */
+	function test_custom_action_with_params() {
+		\WP_Mock::expectAction( 'above_staff_avatar', 12345 );
+
+		\tenup\demo\generate_staff_avatar( 12345 );
 	}
 }
 

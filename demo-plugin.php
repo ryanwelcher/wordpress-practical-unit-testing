@@ -83,8 +83,17 @@ function get_staff_details_list() {
  */
 function generate_staff_list() {
 	ob_start();
-	do_action( 'above_staff_avatar' );
+	do_action( 'above_staff_list' );
 	echo 'MARKUP';
 	return ob_end_clean();
+}
 
+/**
+ *
+ */
+function generate_staff_avatar( $post_id ) {
+	ob_start();
+	do_action( 'above_staff_avatar', $post_id );
+	echo 'MARKUP';
+	return ob_end_clean();
 }
