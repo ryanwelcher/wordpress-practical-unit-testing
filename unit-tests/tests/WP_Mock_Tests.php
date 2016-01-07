@@ -48,26 +48,25 @@ class WP_Mock_Tests extends PHPUnit_Framework_TestCase {
 
 
 	/**
-	 * The get_staff_email_list function uses WP items so
-	 * we need to setup passthru methods using WP_Mock in order test it
+	 * The get_staff_email_list function uses WP core functions so
+	 * we need to setup pass through methods using WP_Mock in order test it
 	 */
 	function test_get_staff_email_list() {
 
-
-		// Our function calls this 1 time, with the arguments list below  and returns th
 		\WP_Mock::wpFunction( 'get_post_meta', array(
-			'times' => 1,
-			'args'  => array( \WP_Mock\Functions::type( 'int' ), 'email_list', true ),
-			'return' => array( 'email1@email.com' ),
+			'times' => 1, // How many times this method is called by the function we're testing.
+			'args'  => array( \WP_Mock\Functions::type( 'int' ), 'email_list', true ), // Args being passed to the function, WP_Mock allows for type checking.
+			'return' => array( 'email1@email.com' ), // The data that we are passing through the function
 		));
 
-
+		// We use absint so we have to mock it as well
 		\WP_Mock::wpFunction( 'absint', array(
 			'times' => 1,
-			'args' => array( '*' ),
+			'args' => array( '*' ), // This means the arg can be anything - useful when testing bad data.
 			'return' => 1,
 		));
 
+		//now we can call the method with a dummy value.
 		$results = \tenup\demo\get_staff_email_list( 1 );
 
 		//now that we have the data that we need, we can do any assertions
@@ -77,6 +76,39 @@ class WP_Mock_Tests extends PHPUnit_Framework_TestCase {
 
 		//assert that the array has the email in it.
 		$this->assertContains( 'email1@email.com', $results );
+	}
+
+
+	/**
+	 * Testing a custom filter
+	 */
+	function test_filtering_staff_details_list() {
+
+		$filtered_array = array(
+			'email',
+			'phone',
+			'ext',
+			'coffee type',
+		);
+
+		\WP_Mock::onFilter( 'filter_staff_details_list' )
+			->with( array( 'email', 'phone', 'ext' ) )
+			->reply( $filtered_array );
+
+		$details = \tenup\demo\get_staff_details_list();
+
+		$this->assertSame( $filtered_array, $details );
+	}
+
+
+	/**
+	 * Testing a custom action
+	 */
+	function test_custom_action() {
+
+		\WP_Mock::expectAction( 'above_staff_avatar' );
+
+		\tenup\demo\generate_staff_list();
 	}
 }
 

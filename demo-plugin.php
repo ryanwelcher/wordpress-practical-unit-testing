@@ -60,3 +60,31 @@ function is_new_and_valid_email( $new_email, $list_of_saved_emails ) {
 
 	return true;
 }
+
+
+/**
+ * Get the list of default staff details that can be saved
+ * @return mixed|void
+ */
+function get_staff_details_list() {
+
+	$details = array(
+		'email',
+		'phone',
+		'ext',
+	);
+
+	return apply_filters( 'filter_staff_details_list' , $details );
+}
+
+
+/**
+ * Output the avatar with an action to add more things
+ */
+function generate_staff_list() {
+	ob_start();
+	do_action( 'above_staff_avatar' );
+	echo 'MARKUP';
+	return ob_end_clean();
+
+}
