@@ -92,7 +92,7 @@ class WP_Mock_Tests extends PHPUnit_Framework_TestCase {
 		);
 
 		\WP_Mock::onFilter( 'filter_staff_details_list' )
-			->with( array( 'email', 'phone', 'ext' ) )
+			->with( array( 'email', 'phone', 'ext' ) ) //this is the data being passed to the filter
 			->reply( $filtered_array );
 
 		$details = \tenup\demo\get_staff_details_list();
@@ -102,7 +102,7 @@ class WP_Mock_Tests extends PHPUnit_Framework_TestCase {
 
 
 	/**
-	 * Testing a custom action
+	 * Testing a custom action.
 	 */
 	function test_custom_action() {
 

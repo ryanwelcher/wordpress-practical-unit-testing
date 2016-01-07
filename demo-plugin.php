@@ -79,7 +79,7 @@ function get_staff_details_list() {
 
 
 /**
- * Output the avatar with an action to add more things
+ * Output a list of staff with an action
  */
 function generate_staff_list() {
 	ob_start();
@@ -89,7 +89,7 @@ function generate_staff_list() {
 }
 
 /**
- *
+ * Output the avatar with an action to add more things
  */
 function generate_staff_avatar( $post_id ) {
 	ob_start();
