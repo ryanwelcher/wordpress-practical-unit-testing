@@ -55,6 +55,7 @@ class Simple_Tests extends PHPUnit_Framework_TestCase {
 	function test_is_new_and_valid_email_once() {
 		$expected_result = true;
 		$actual_result   = \tenup\demo\is_new_and_valid_email( 'new@email.com', array( 'alternate@email.com' ) );
+
 		$this->assertSame( $expected_result, $actual_result );
 	}
 

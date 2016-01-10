@@ -16,6 +16,12 @@ class Real_World_Class {
 
 
 	/**
+	 *
+	 */
+	protected $_template_key = 'component-layout';
+
+
+	/**
 	 * Real_World_Class constructor.
 	 *
 	 * Hard to test these - how can we be sure they are added
@@ -45,6 +51,32 @@ class Real_World_Class {
 		} else {
 			return $success->get_error_message();
 		}
+	}
+
+	/**
+	 * Get the path to the template path we want to use
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param int $item_id
+	 *
+	 * @return string The path to the template file
+	 */
+	function get_component_presentation_template_path( $item_id ) {
+
+		//allow overriding of template path
+		$override_path = apply_filters( 'component_template', false );
+
+		if ( $override_path  ) {
+			return $override_path;
+		}
+
+		$base_path = __DIR__ . '/template-parts/views-%s.php';
+		$style     = ( $s = get_post_meta( $item_id, $this->_template_key, true ) ) ? '-'. $s : '';
+		$template_path = sprintf( $base_path, $style );
+
+		return $template_path;
+
 	}
 
 

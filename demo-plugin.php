@@ -23,24 +23,6 @@ function action_register_cpt() {
 
 
 /**
- * Return the list of emails for a given staff member
- *
- * @param $post_id
- *
- * @return array|bool
- */
-function get_staff_email_list( $post_id ) {
-	$rtn = false;
-	$email_list = get_post_meta( absint( $post_id ), 'email_list', true );
-
-	if ( $email_list && ! empty( $email_list ) ) {
-		$rtn = $email_list;
-	}
-
-	return $rtn;
-}
-
-/**
  * Confirm that a new email is both valid and not already in a list of known email addresses.
  *
  * @param string $new_email           The new email we're going to add.
@@ -60,6 +42,26 @@ function is_new_and_valid_email( $new_email, $list_of_saved_emails ) {
 
 	return true;
 }
+
+
+/**
+ * Return the list of emails for a given staff member
+ *
+ * @param $post_id
+ *
+ * @return array|bool
+ */
+function get_staff_email_list( $post_id ) {
+	$rtn = false;
+	$email_list = get_post_meta( absint( $post_id ), 'email_list', true );
+
+	if ( $email_list && ! empty( $email_list ) ) {
+		$rtn = $email_list;
+	}
+
+	return $rtn;
+}
+
 
 
 /**
