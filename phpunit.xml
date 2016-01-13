@@ -8,7 +8,7 @@
     </testsuites>
     <groups>
         <exclude>
-            <group>ajax</group>
+            <group>dont-run</group>
         </exclude>
     </groups>
 </phpunit>
