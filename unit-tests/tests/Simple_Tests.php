@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Class Simple_Tests
  *
@@ -9,44 +8,14 @@
  */
 class Simple_Tests extends PHPUnit_Framework_TestCase {
 
-	/**
-	 * Very simple test to show some of the assertions
-	 *
-	 * @link {https://phpunit.de/manual/current/en/appendixes.assertions.html}
-	 */
-	function test_basic_assertions() {
-
-		// Tests can be skipped when running the suite.
-		$this->markTestSkipped(
-			'Some examples below'
-		);
-
-
-		// if ( $thing1 == $thing2 )
-		$this->assertEquals( $thing1, $thing2 );
-
-		// if ( $thing1 === $thing2 )
-		$this->assertSame( $thing1, $thing2 );
-
-		$this->assertFalse( $thing_that_is_false );
-		$this->assertTrue( $thing_that_is_true );
-
-		$this->assertInstanceOf( 'WP_Post', $post );
-
-		// 100 is greater than 1
-		$this->assertGreaterThan( 100, 1 );
-		// 1 is less that 100
-		$this->assertLessThan( 1, 100 );
-	}
 
 	/**
-	 * Marking a test as incomplete
+	 * This is not recognized as a test and doesn't run - we need to prefix methods with `test_`
 	 */
-	function test_this_one_isnt_ready() {
-		$this->markTestIncomplete(
-			'This test has not been implemented yet.'
-		);
+	function no_prefix() {
+		$this->assertTrue( false );
 	}
+
 
 
 	/**
@@ -109,7 +78,7 @@ class Simple_Tests extends PHPUnit_Framework_TestCase {
 					'new@email.com',
 				),
 			),
-			// Invalid email that already exists.
+			// Invalid email.
 			array(
 				false,
 				'not-an-email',
