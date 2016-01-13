@@ -10,13 +10,13 @@ namespace tenup\demo;
  */
 class Real_World_Class {
 	/**
-	 * @var string $_cpt The name of the custom post type
+	 * @var string $_cpt The name of the custom post type.
 	 */
 	protected $_cpt = 'custom-thing';
 
 
 	/**
-	 *
+	 * @var string $_template_key Custom meta key for a stored component template.
 	 */
 	protected $_template_key = 'component-layout';
 
@@ -30,6 +30,7 @@ class Real_World_Class {
 		add_action( 'init', array( $this, 'action_init' ) );
 		add_action( 'save_post', array( $this, 'action_save_post' ) );
 	}
+
 
 	/**
 	 * Nothing is returned - not really testable
@@ -53,31 +54,7 @@ class Real_World_Class {
 		}
 	}
 
-	/**
-	 * Get the path to the template path we want to use
-	 *
-	 * @since 0.1.0
-	 *
-	 * @param int $item_id
-	 *
-	 * @return string The path to the template file
-	 */
-	function get_component_presentation_template_path( $item_id ) {
 
-		//allow overriding of template path
-		$override_path = apply_filters( 'component_template', false );
-
-		if ( $override_path  ) {
-			return $override_path;
-		}
-
-		$base_path = __DIR__ . '/template-parts/views-%s.php';
-		$style     = ( $s = get_post_meta( $item_id, $this->_template_key, true ) ) ? '-'. $s : '';
-		$template_path = sprintf( $base_path, $style );
-
-		return $template_path;
-
-	}
 
 
 	/**
@@ -98,6 +75,33 @@ class Real_World_Class {
 			$value = sanitize_text_field( $_POST['data'] );
 			update_post_meta( $post_id, 'meta-name', $value );
 		}
+	}
+
+
+	/**
+	 * Get the path to the template path we want to use
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param int $item_id
+	 *
+	 * @return string The path to the template file
+	 */
+	function get_component_presentation_template_path( $item_id ) {
+
+		//allow overriding of template path
+		$override_path = apply_filters( 'component_template', false );
+
+		if ( $override_path  ) {
+			return $override_path;
+		}
+
+		$base_path = __DIR__ . '/template-parts/views%s.php';
+		$style     = ( $s = get_post_meta( $item_id, $this->_template_key, true ) ) ? '-'. $s : '';
+		$template_path = sprintf( $base_path, $style );
+
+		return $template_path;
+
 	}
 }
 

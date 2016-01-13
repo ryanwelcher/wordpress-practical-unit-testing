@@ -15,6 +15,7 @@ class Real_World_Tests extends PHPUnit_Framework_TestCase {
 	 */
 	function setUp() {
 		\WP_Mock::setUp();
+		$this->instance = new tenup\demo\Real_World_Class();
 	}
 
 	/**
@@ -22,6 +23,7 @@ class Real_World_Tests extends PHPUnit_Framework_TestCase {
 	 */
 	function tearDown() {
 		\WP_Mock::tearDown();
+		unset( $this->instance );
 	}
 
 
@@ -35,12 +37,69 @@ class Real_World_Tests extends PHPUnit_Framework_TestCase {
 		$object->__construct();
 	}
 
+
 	/**
-	 * Testing the post meta save
+	 * Let's test to be sure the function is called.
+	 */
+	function test_action_init() {
+		\WP_Mock::wpPassthruFunction( 'register_post_type' );
+		$this->instance->action_init();
+
+	}
+
+
+	/**
+	 * Test the results of an external call wrapped in to this class
+	 *
+	 * @dataProvider data_generate_admin_message
+	 */
+	function test_generate_admin_message( $is_wp_error, $expected_results, $passed_data ) {
+
+		\WP_Mock::wpFunction( 'is_wp_error', array(
+			'times'  => 1,
+			'return' => $is_wp_error,
+		));
+
+		$this->assertSame( $expected_results, $this->instance->generate_admin_message( $passed_data ) );
+	}
+
+
+	/**
+	 * Data provider.
+	 *
+	 * @return array {
+	 *     @type array {
+	 *         @type bool  $is_wp_error.
+	 *         @type mixed $expected_results
+	 *         @type mixed $passd_data.
+	 *     }
+	 * }
+	 */
+	function data_generate_admin_message() {
+		return array(
+			// is_wp_error == true;
+			array(
+				true,
+				'Error Happened',
+				12345,
+			),
+
+			// is_wp_error == false
+			array(
+				false,
+				true,
+				'Message',
+			),
+		);
+	}
+
+
+	/**
+	 * Testing the post meta save by checking that all of the the methods are being called.
+	 *
+	 * If WP_Mock doesn't complain then then the test passes.
 	 */
 	function test_save_post() {
-
-		$this->instance = new tenup\demo\Real_World_Class();
 
 		//Fake the post data
 		$_POST = array(
@@ -65,51 +124,64 @@ class Real_World_Tests extends PHPUnit_Framework_TestCase {
 			'return' => true,
 		) );
 
-		$actual_results = $this->instance->action_save_post( 12345 );
-
-		// Successfully update should return true.
-		//$this->assertTrue( $actual_results );
-	}
-
-
-	function data_save_post() {
-		return array(
-			array(
-				true,
-			),
-		);
+		$this->instance->action_save_post( 12345 );
 	}
 
 
 	/**
-	 * Test the results of an external call wrapped in to this class
+	 * Testing the return component path without filtering
 	 *
-	 * @dataProvider data_generate_admin_message
+	 * @dataProvider data_get_component_presentation_template_path
 	 */
-	function test_generate_admin_message( $is_wp_error, $expected_results, $passed_data ) {
+	function test_get_component_presentation_template_path( $get_post_meta_returns, $expected_filename ) {
 
-		\WP_Mock::wpFunction( 'is_wp_error', array(
-			'times'  => 1,
-			'return' => $is_wp_error,
+		// Mock up the get_post_meta call
+		\WP_Mock::wpFunction( 'get_post_meta', array(
+			'times' => 1,
+			'return' => $get_post_meta_returns,
 		));
 
-		$this->instance = new tenup\demo\Real_World_Class();
-		$this->assertSame( $expected_results, $this->instance->generate_admin_message( $passed_data ) );
+
+		$actual_path   = $this->instance->get_component_presentation_template_path( 1337 );
+
+		$this->assertSame( $expected_filename, basename( $actual_path ) );
 	}
 
-
-	function data_generate_admin_message() {
+	/**
+	 * Data provider.
+	 *
+	 * @return array {
+	 *     @type array {
+	 *         @type bool   $get_post_meta_returns.
+	 *         @type string $expected_filename
+	 *     }
+	 * }
+	 */
+	function data_get_component_presentation_template_path() {
 		return array(
 			array(
-				true,
-				'Error Happened',
-				12345,
+				'my-test',
+				'views-my-test.php',
 			),
 			array(
 				false,
-				true,
-				'Message',
+				'views.php',
 			),
 		);
+	}
+
+	/**
+	 * Test the filter override for the same method
+	 */
+	function test_filters_get_component_presentation_template_path() {
+
+		\WP_Mock::onFilter( 'component_template' )
+		        ->with( false )
+		        ->reply( 'custom-template.php' );
+
+		$actual = $this->instance->get_component_presentation_template_path( 1337 );
+
+		$this->assertSame( 'custom-template.php', $actual );
+
 	}
 }
