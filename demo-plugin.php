@@ -33,6 +33,9 @@ function init_actions() {
 	add_action( 'init', '\tenup\demo\action_register_cpt' );
 }
 
+
+
+
 /**
  * Callback to register the CPT
  */
@@ -44,6 +47,9 @@ function action_register_cpt() {
 	);
 	register_post_type( 'staff', $args );
 }
+
+
+
 
 /**
  * Return the list of emails for a given staff member
@@ -64,6 +70,7 @@ function get_staff_email_list( $post_id ) {
 }
 
 
+
 /**
  * Get the list of default staff details that can be saved
  * @return mixed|void
@@ -80,22 +87,25 @@ function get_staff_details_list() {
 }
 
 
+
+
 /**
  * Output a list of staff with an action
  */
 function generate_staff_list() {
 	ob_start();
 	do_action( 'above_staff_list' );
-	echo 'MARKUP';
-	return ob_end_clean();
+	echo '<h1>rage MARKUP!</h1>';
+	return ob_get_clean();
 }
 
+
 /**
- * Output the avatar with an action to add more things
+ * Output the avatar with an action that has a parameter
  */
-function generate_staff_avatar( $post_id ) {
+function generate_staff_avatar( $staff_id) {
 	ob_start();
-	do_action( 'above_staff_avatar', $post_id );
+	do_action( 'above_staff_avatar', $staff_id );
 	echo 'MARKUP';
-	return ob_end_clean();
+	return ob_get_clean();
 }

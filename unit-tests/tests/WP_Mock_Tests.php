@@ -68,20 +68,16 @@ class WP_Mock_Tests extends PHPUnit_Framework_TestCase {
 
 
 	/**
+	 * Testing to be sure the the method was called
 	 *
+	 * In this case we don't really care what was returned, just that it was called
 	 */
 	function test_registering_the_cpt() {
 
-		\WP_Mock::wpFunction( 'register_post_type', array(
-			'times' => 1,
-			'args'  => array( 'staff', array( 'public' => true, 'label' => 'Staff' ) ),
-		) );
+		\WP_Mock::wpPassthruFunction( 'register_post_type' );
 
 		\tenup\demo\action_register_cpt();
 	}
-
-
-
 
 
 	/**
@@ -123,6 +119,15 @@ class WP_Mock_Tests extends PHPUnit_Framework_TestCase {
 		\WP_Mock::expectAction( 'above_staff_avatar', 12345 );
 
 		\tenup\demo\generate_staff_avatar( 12345 );
+	}
+
+
+	/**
+	 * Testing that the returned markup is the same.
+	 */
+	function test_generate_staff_list_markup() {
+		
+		$this->assertSame( '<h1>rage MARKUP!</h1>', \tenup\demo\generate_staff_list() );
 	}
 }
 
