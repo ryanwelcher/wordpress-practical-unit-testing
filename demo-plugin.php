@@ -2,25 +2,6 @@
 
 namespace tenup\demo;
 
-/**
- * setup the actions
- */
-function init_actions() {
-	add_action( 'init', '\tenup\demo\action_register_cpt' );
-}
-
-/**
- * Callback to register the CPT
- */
-function action_register_cpt() {
-
-	$args = array(
-		'public' => true,
-		'label'  => 'Staff',
-	);
-	register_post_type( 'staff', $args );
-}
-
 
 /**
  * Confirm that a new email is both valid and not already in a list of known email addresses.
@@ -44,6 +25,26 @@ function is_new_and_valid_email( $new_email, $list_of_saved_emails ) {
 }
 
 
+
+/**
+ * setup the actions
+ */
+function init_actions() {
+	add_action( 'init', '\tenup\demo\action_register_cpt' );
+}
+
+/**
+ * Callback to register the CPT
+ */
+function action_register_cpt() {
+
+	$args = array(
+		'public' => true,
+		'label'  => 'Staff',
+	);
+	register_post_type( 'staff', $args );
+}
+
 /**
  * Return the list of emails for a given staff member
  *
@@ -61,7 +62,6 @@ function get_staff_email_list( $post_id ) {
 
 	return $rtn;
 }
-
 
 
 /**
