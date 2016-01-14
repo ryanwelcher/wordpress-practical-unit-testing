@@ -21,6 +21,30 @@ class WP_Mock_Tests extends PHPUnit_Framework_TestCase {
 		\WP_Mock::tearDown();
 	}
 
+	/**
+	 * Simple test to be sure that our plugin is adding the actions as expected
+	 */
+	function test_init_actions() {
+
+		\WP_Mock::expectActionAdded( 'init', '\tenup\demo\action_register_cpt' );
+
+		//call the method that adds the actions we're expecting
+		\tenup\demo\init_actions();
+	}
+
+	/**
+	 * Testing to be sure the the method was called
+	 *
+	 * In this case we don't really care what was returned, just that it was called
+	 */
+	function test_registering_the_cpt() {
+
+		\WP_Mock::wpPassthruFunction( 'register_post_type' );
+
+		\tenup\demo\action_register_cpt();
+	}
+
+
 
 	/**
 	 * The get_staff_email_list function uses WP core functions so
@@ -53,31 +77,6 @@ class WP_Mock_Tests extends PHPUnit_Framework_TestCase {
 		$this->assertContains( 'email1@email.com', $results );
 	}
 
-
-
-	/**
-	 * Simple test to be sure that our plugin is adding the actions as expected
-	 */
-	function test_init_actions() {
-
-		\WP_Mock::expectActionAdded( 'init', '\tenup\demo\action_register_cpt' );
-
-		//call the method that adds the actions we're expecting
-		\tenup\demo\init_actions();
-	}
-
-
-	/**
-	 * Testing to be sure the the method was called
-	 *
-	 * In this case we don't really care what was returned, just that it was called
-	 */
-	function test_registering_the_cpt() {
-
-		\WP_Mock::wpPassthruFunction( 'register_post_type' );
-
-		\tenup\demo\action_register_cpt();
-	}
 
 
 	/**
@@ -126,7 +125,6 @@ class WP_Mock_Tests extends PHPUnit_Framework_TestCase {
 	 * Testing that the returned markup is the same.
 	 */
 	function test_generate_staff_list_markup() {
-		
 		$this->assertSame( '<h1>rage MARKUP!</h1>', \tenup\demo\generate_staff_list() );
 	}
 }
