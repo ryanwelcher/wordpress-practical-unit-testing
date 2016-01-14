@@ -5,7 +5,7 @@
  */
 namespace {
 	/**
-	 * We need to mock this out
+	 * We need to mock this out so we can load the real world class and not fatal out.
 	 */
 	function init_class( $class ) {
 		return;
@@ -39,6 +39,13 @@ namespace {
  * other namespaces
  */
 namespace fake\name\space {
+
+
+	/**
+	 * @param $message
+	 *
+	 * @return \WP_Error
+	 */
 	function admin_message( $message ) {
 		if ( ! empty( $message ) && 'string' === gettype( $message ) ) {
 			return $message;
