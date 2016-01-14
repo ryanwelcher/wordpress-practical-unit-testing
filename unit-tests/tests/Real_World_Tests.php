@@ -8,6 +8,9 @@
 class Real_World_Tests extends PHPUnit_Framework_TestCase {
 
 
+	/**
+	 * @var Real_World_Class instance of the class we're testing
+	 */
 	protected $instance;
 
 	/**
