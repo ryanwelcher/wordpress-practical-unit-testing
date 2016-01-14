@@ -41,7 +41,7 @@ class Real_World_Class {
 
 
 	/**
-	 * Calling a method from another namespace
+	 * Calling a method from another namespace and uses an external class
 	 */
 	function generate_admin_message( $message ) {
 
