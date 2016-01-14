@@ -4,7 +4,7 @@
  *
  * Tests that just use PHPUnit
  *
- * @group simple-tests
+ * @group simple
  */
 class Simple_Tests extends PHPUnit_Framework_TestCase {
 

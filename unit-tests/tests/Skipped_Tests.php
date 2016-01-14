@@ -3,7 +3,7 @@
  * Class Skipped_Tests
  *
  *
- * @group dont-run
+ * @group skipped
  */
 class Skipped_Tests extends PHPUnit_Framework_TestCase {
 
@@ -14,21 +14,19 @@ class Skipped_Tests extends PHPUnit_Framework_TestCase {
 	 */
 	function test_basic_assertions() {
 
-		// if ( $thing1 == $thing2 )
-		$this->assertEquals( $thing1, $thing2 );
+		$this->assertFalse( false );
 
-		// if ( $thing1 === $thing2 )
-		$this->assertSame( $thing1, $thing2 );
+		$this->assertTrue( true );
 
-		$this->assertFalse( $thing_that_is_false ); //this is the first failure - why not the others above?
-		$this->assertTrue( $thing_that_is_true );
+		$this->assertEquals( 'thing', 'thing' );
 
-		$this->assertInstanceOf( 'WP_Post', $post );
+		$this->assertSame( 'thing', 'thing' ); // Strict equality.
 
-		// 100 is greater than 1
-		$this->assertGreaterThan( 100, 1 );
-		// 1 is less that 100
-		$this->assertLessThan( 1, 100 );
+		$this->assertInstanceOf( 'WP_Error', new WP_Error() );
+
+		$this->assertGreaterThan( 1, 100 );
+
+		$this->assertLessThan( 100, 1 );
 	}
 
 

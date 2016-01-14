@@ -22,7 +22,7 @@ namespace {
 		protected $_message;
 		protected $_data;
 
-		function __construct( $code, $message, $data ) {
+		function __construct( $code = '', $message = '', $data = '' ) {
 
 			$this->_code    = $code;
 			$this->_message = $message;

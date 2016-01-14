@@ -7,7 +7,7 @@
     </testsuites>
     <groups>
         <exclude>
-            <group>dont-run</group>
+            <group>skipped</group>
         </exclude>
     </groups>
 </phpunit>
