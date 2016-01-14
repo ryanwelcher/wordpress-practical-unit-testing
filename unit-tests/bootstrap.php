@@ -18,7 +18,6 @@ require_once 'demo-plugin.php';
 /**
  * Real World
  */
-
 require_once 'class-real-world-code.php';
 
 

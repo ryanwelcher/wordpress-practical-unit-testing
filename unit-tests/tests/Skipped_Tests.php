@@ -8,6 +8,13 @@
 class Skipped_Tests extends PHPUnit_Framework_TestCase {
 
 	/**
+	 * Simple Test
+	 */
+	function test_this_is_true() {
+		$this->assertTrue( true );
+	}
+
+	/**
 	 * Very simple test to show some of the assertions
 	 *
 	 * @link {https://phpunit.de/manual/current/en/appendixes.assertions.html}
@@ -49,13 +56,5 @@ class Skipped_Tests extends PHPUnit_Framework_TestCase {
 		$this->markTestSkipped(
 			'Some examples below'
 		);
-	}
-
-
-	/**
-	 * Simple Test
-	 */
-	function test_this_is_true() {
-		$this->assertTrue( true );
 	}
 }

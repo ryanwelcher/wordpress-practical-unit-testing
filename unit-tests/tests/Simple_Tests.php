@@ -10,7 +10,9 @@ class Simple_Tests extends PHPUnit_Framework_TestCase {
 
 
 	/**
-	 * This is not recognized as a test and doesn't run - we need to prefix methods with `test_`
+	 * This is not recognized as a test
+	 * we need to prefix methods with `test_` or use the [@]test attribute
+	 *
 	 */
 	function no_prefix() {
 		$this->assertTrue( false );
