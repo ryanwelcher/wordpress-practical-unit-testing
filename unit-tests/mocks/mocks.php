@@ -39,8 +39,6 @@ namespace {
  * other namespaces
  */
 namespace fake\name\space {
-
-
 	/**
 	 * @param $message
 	 *

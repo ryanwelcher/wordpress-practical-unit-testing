@@ -1,8 +1,5 @@
 <?php
-
-namespace tenup\demo;
-
-
+namespace welcher\plugin;
 /**
  * Confirm that a new email is both valid and not already in a list of known email addresses.
  *
