@@ -1,8 +1,5 @@
 <?php
 
-namespace tenup\demo;
-
-
 /**
  * Class Real_World_Class
  *
