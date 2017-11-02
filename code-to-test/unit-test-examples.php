@@ -10,4 +10,4 @@ require_once 'demo-plugin.php';
 /**
  * Init the plugin
  */
-\tenup\demo\init_actions();
+init_actions();
