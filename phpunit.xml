@@ -1,4 +1,4 @@
-<phpunit bootstrap="unit-tests/bootstrap.php"
+<phpunit bootstrap=""
          colors="true">
     <testsuites>
         <testsuite>
